@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.*;
-import ru.zarwlad.qainterview.pages.FactorialPage;
+import ru.zarwlad.qainterview.pages.ExampleFactorialPage;
 
 import java.time.Duration;
 
@@ -16,8 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class FactorialPageTest {
-    FactorialPage factorialPage = new FactorialPage();
+public class ExampleFactorialPageTest {
+    ExampleFactorialPage exampleFactorialPage = new ExampleFactorialPage();
 
     @BeforeAll
     public static void setUpAll() {
@@ -28,7 +28,7 @@ public class FactorialPageTest {
 
     @BeforeEach
     public void setUp() {
-        factorialPage = open(FactorialPage.url, FactorialPage.class);
+        exampleFactorialPage = open(ExampleFactorialPage.url, ExampleFactorialPage.class);
     }
 
     @AfterAll
@@ -37,17 +37,17 @@ public class FactorialPageTest {
     }
 
     @Test
-    public void testFactorial_5_is_120() {
-        factorialPage.sendData("5");
-        factorialPage.getResult().shouldHave(partialText("The factorial"), Duration.ofSeconds(1L));
-        assertEquals("120", factorialPage.extractResult());
+    public void testPageObjectFactorial_5_is_120() {
+        exampleFactorialPage.sendData("5");
+        exampleFactorialPage.getResult().shouldHave(partialText("The factorial"), Duration.ofSeconds(1L));
+        assertEquals("120", exampleFactorialPage.extractResult());
     }
 
     @Test
-    public void testNative(){
+    public void testNativeSelenide_5_is_120(){
         $(By.id("number")).sendKeys("5");
         $(By.id("getFactorial")).click();
-        $(By.id("resultDiv")).shouldHave(Condition.partialText("The factorial"), Duration.ofSeconds(3L));
+        $(By.id("resultDiv")).shouldHave(Condition.partialText("The factorial"), Duration.ofSeconds(1L));
         String text = $(By.id("resultDiv")).text();
         assertEquals("The factorial of 5 is: 120", text);
     }

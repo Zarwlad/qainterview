@@ -3,7 +3,7 @@ package ru.zarwlad.qainterview.pages;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.FindBy;
 
-public class FactorialPage {
+public class ExampleFactorialPage {
     public static final String url = "https://qainterview.pythonanywhere.com/";
 
     @FindBy(xpath = "//input[@id=\"number\"]")
